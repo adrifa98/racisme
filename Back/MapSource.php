@@ -1,7 +1,6 @@
 <?php
 
 include('conexiondb.class.php');
-
 switch ($_GET['func']) {
     case 'GetMap':
         getMapaData();

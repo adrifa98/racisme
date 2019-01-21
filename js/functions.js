@@ -1,4 +1,3 @@
-
 function Marker() {
     THREE.Object3D.call(this);
 
@@ -60,19 +59,26 @@ var controls;
 init();
 
 function init() {
+    
+    
+    
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 100);
+    //scene.background = new THREE.Color( "#0000ffff" );
     camera.position.set(0.0, 1.5, 3.0);
-
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    
+    
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha:true });
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setClearColor(0x000000, 0);
 
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
     controls.autoRotateSpeed = -1.0;
     controls.enablePan = false;
-    controls.minDistance = 2;
-    controls.maxDistance = 5;
+    controls.minDistance = 3.5;
+    controls.maxDistance = 3.5;
 
     var ambient = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambient);
@@ -80,13 +86,16 @@ function init() {
     var direcitonal = new THREE.DirectionalLight(0xffffff, 0.5);
     direcitonal.position.set(5.0, 2.0, 5.0).normalize();
     scene.add(direcitonal);
+    
+    var light = new THREE.PointLight(0xffffff, 1, Infinity);
+camera.add(light);
 
     // just some code for the loading
     var manager = createLoader(renderer.domElement, animate);
 
     var texLoader = new THREE.TextureLoader(manager).setCrossOrigin(true);
 
-    var texture = texLoader.load('https://s3-eu-west-2.amazonaws.com/bckld/lab/textures/earth_latlon.jpg');
+    var texture = texLoader.load('media/textura_mapa.jpg');
     texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
     var earth = new Earth(1.0, texture);
@@ -112,7 +121,7 @@ function onResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth*0.8, window.innerHeight*0.8);
 }
 
 function animate() {

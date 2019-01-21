@@ -1,105 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Racism</title>
-          <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-          <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+$('form').submit( function(event) {
+    var formId = this.id,
+        form = this;
+    mySpecialFunction(formId);
 
-        <link rel="stylesheet" href="css/style.css">
-        <script src="https://threejs.org/build/three.js"></script>
-        <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
-        <script src="js/loading.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-    
-    <style>.autocomplete-items {
-    margin-left: 50px;
-    padding: 10px;
-    background-color: #424349;
-    }</style>
-    
-    
-</head>
-        <script>$( '.sidebar' ).fixedsticky();</script>   
-        
-        <header><p>Scroll down to see the magic!</p></header>
-        <body><div id='stars'></div>
-<div id='stars2'></div>
-<div id='stars3'></div>
-<section class="candy-wrapper">
-<div id="mapa">    
-<script src="js/functions.js"></script></div>
-<aside class="sidebar fixedsticky">
-    
-    <div class='login'>
-  <div class='login_title'>
-    <span>Comparte tus experiencias</span>
-  </div>
-        
-        
-<form action="back/MapSource.php" autocomplete="off" name="form" id="form" method="get">
-    
-    
-  <div class='login_fields'>
-    <div class='login_fields__user'>
-      <div class='icon'>
-        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/user_icon_copy.png'>
-      </div>
-      <input placeholder='Nombre' type='text'>
-        <div class='validation'>
-          <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png'>
-        </div>
-    </div>
-    <div class='login_fields__loc'>
-      <div class='icon'>
-        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/user_icon_copy.png'>
-      </div>
-        
-        
-        
-      <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="myCountry" placeholder="Pais">
-  </div>
-        </div>
-        <div class='validation'>
-          <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png'>
-        </div>
-      
-      
-      
-      
-    <div class='login_fields__password'>
-      <div class='icon'>
-        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/lock_icon_copy.png'>
-      </div>
-      <textarea name="exp">Tu experiencia aqui.</textarea>
-        
-      <div class='validation'>
-        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png'>
-      </div>
-    </div>
-    <div class='login_fields__submit'>
-      <input type='submit' value='Enviar' id="enviar">
-      <div class='forgot'>
-        <a href='#'>Politicas de privacidad</a>
-      </div>
-    </div>
-  </div></form>
-  <div class='success'>
-    <h2>Experiencia compartida</h2>
-    <p>Gracias</p>
-  </div>
-  <div class='disclaimer'>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper laoreet placerat. Nullam semper auctor justo, rutrum posuere odio vulputate nec.</p>
-  </div>
-</div>
-<div class='authent'>
-  <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg'>
-  <p>Compartiendo...</p>
-</div>
-<script  src="js/formulario-mapa.js"></script>
-<script>
+    event.preventDefault();
+
+    setTimeout( function () { 
+        form.submit();
+    }, 300);
+}); 
+
+$('input[type="submit"]').click(function(){
+  $('.login').addClass('test')
+  setTimeout(function(){
+    $('.login').addClass('testtwo')
+  },300);
+  setTimeout(function(){
+    $(".authent").show().animate({right:-320},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+    $(".authent").animate({opacity: 1},{duration: 200, queue: false }).addClass('visible');
+  },500);
+  setTimeout(function(){
+    $(".authent").show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+    $(".authent").animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
+    $('.login').removeClass('testtwo')
+  },2500);
+  setTimeout(function(){
+    $('.login').removeClass('test')
+    $('.login div').fadeOut(123);
+  },2800);
+  setTimeout(function(){
+    $('.success').fadeIn();
+  },3200);
+});
+
+$('input[type="text"],input[type="password"]').focus(function(){
+  $(this).prev().animate({'opacity':'1'},200)
+});
+$('input[type="text"],input[type="password"]').blur(function(){
+  $(this).prev().animate({'opacity':'.5'},200)
+});
+
+$('input[type="text"],input[type="password"]').keyup(function(){
+  if(!$(this).val() == ''){
+    $(this).next().animate({'opacity':'1','right' : '30'},200)
+  } else {
+    $(this).next().animate({'opacity':'0','right' : '20'},200)
+  }
+});
+
+var open = 0;
+$('.tab').click(function(){
+  $(this).fadeOut(200,function(){
+    $(this).parent().animate({'left':'0'})
+  });
+});
+
+var textarea = document.querySelector('textarea');
+
+textarea.addEventListener('keydown', autosize);
+             
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+
+
+
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -202,9 +174,3 @@ var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla"
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), countries);
-</script>
-</aside>
-</section>
-</body>
-    
-</html>

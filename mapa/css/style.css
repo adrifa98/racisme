@@ -1,0 +1,30 @@
+html{
+    background-color: transparent;
+}
+canvas {
+   position: absolute;
+   width: 100%;
+   cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    animation: zoominoutsinglefeatured 5s;
+}
+
+@keyframes zoominoutsinglefeatured {
+    0% {
+        transform: scale(0.1,0.1);
+    }
+    60% {
+        transform: scale(1.1,1.1);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+canvas:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+    
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- saved from url=(0088)https://s.codepen.io/boomerang/iFrameKey-116f4c0c-4525-02f4-76f0-43d44b4e294a/index.html -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.pac-container{background-color:#fff;position:absolute!important;z-index:1000;border-radius:2px;border-top:1px solid #d9d9d9;font-family:Arial,sans-serif;box-shadow:0 2px 6px rgba(0,0,0,0.3);-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.pac-logo:after{content:"";padding:1px 1px 1px 0;height:18px;box-sizing:border-box;text-align:right;display:block;background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);background-position:right;background-repeat:no-repeat;background-size:120px 14px}.hdpi.pac-logo:after{background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png)}.pac-item{cursor:default;padding:0 4px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;line-height:30px;text-align:left;border-top:1px solid #e6e6e6;font-size:11px;color:#999}.pac-item:hover{background-color:#fafafa}.pac-item-selected,.pac-item-selected:hover{background-color:#ebf2fe}.pac-matched{font-weight:700}.pac-item-query{font-size:13px;padding-right:3px;color:#000}.pac-icon{width:15px;height:20px;margin-right:7px;margin-top:6px;display:inline-block;vertical-align:top;background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);background-size:34px}.hdpi .pac-icon{background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png)}.pac-icon-search{background-position:-1px -1px}.pac-item-selected .pac-icon-search{background-position:-18px -1px}.pac-icon-marker{background-position:-1px -161px}.pac-item-selected .pac-icon-marker{background-position:-18px -161px}.pac-placeholder{color:gray}
+</style><script src="./console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js.descarga"></script><script src="./css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js.descarga"></script><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"><link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111"><link rel="canonical" href="https://codepen.io/CSWApps/pen/itsCf">
+
+<link rel="stylesheet" href="./bootstrap.min.css">
+<style class="cp-pen-styles">body {
+  background-color: #5c4084;
+  margin: 50px;
+}
+
+.container {
+  background-color: #fff;
+  padding: 40px 80px;
+  border-radius: 8px;
+}
+
+h1 {
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 100;
+  margin: 0 0 35px 0;
+  background: -webkit-linear-gradient(#fff, #999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+h4 {
+  color: #999;
+}
+</style><script type="text/javascript" charset="UTF-8" src="./common.js.descarga"></script><script type="text/javascript" charset="UTF-8" src="./util.js.descarga"></script><script type="text/javascript" charset="UTF-8" src="./controls.js.descarga"></script><script type="text/javascript" charset="UTF-8" src="./places_impl.js.descarga"></script><script type="text/javascript" charset="UTF-8" src="./geocoder.js.descarga"></script><script type="text/javascript" charset="UTF-8" src="./AutocompletionService(2).GetPredictions"></script><script type="text/javascript" charset="UTF-8" src="./AutocompletionService(3).GetPredictions"></script><script type="text/javascript" charset="UTF-8" src="./PlaceService.GetPlaceDetails"></script></head><body>
+<h1>Geo Coordinates by Address v2</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>A BETTER WAY to get the latitude and longitude of an address using jQuery, and the <a href="https://github.com/ubilabs/geocomplete" target="_blank">geocomplete</a> plugin.</h4>
+      <hr>
+      <form id="property">
+        <div class="form-group">
+          <input type="text" name="name" class="form-control" id="address" placeholder="Address" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <input type="text" name="lat" class="form-control" placeholder="Latitude" readonly="">
+        </div>
+        <div class="form-group">
+          <input type="text" name="lng" class="form-control" placeholder="Longitude" readonly="">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="./stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js.descarga"></script><script src="./jquery.min.js.descarga"></script><script src="./jquery.geocomplete.min.js.descarga"></script><script src="./js"></script>
+<script>$(document).ready(function () {
+  // Call Geo Complete
+  $("#address").geocomplete({ details: "form#property" });
+});
+//# sourceURL=pen.js
+</script>
+<div class="pac-container pac-logo" style="width: 1006px; position: absolute; left: 447px; top: 286px; display: none;"></div></body></html>

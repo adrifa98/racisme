@@ -4,8 +4,9 @@ function Marker() {
     var radius = 0.005;
     var sphereRadius = 0.02;
     var height = 0.05;
+    var URL = null;
 
-    var material = new THREE.MeshPhongMaterial({ color: 0xbab68f });
+    var material = new THREE.MeshPhongMaterial({ color: 0xab9aca });
 
     var cone = new THREE.Mesh(new THREE.ConeBufferGeometry(radius, height, 8, 1, true), material);
     cone.position.y = height * 0.5;
@@ -38,16 +39,19 @@ function Earth(radius, texture) {
 
 Earth.prototype = Object.create(THREE.Object3D.prototype);
 
-Earth.prototype.createMarker = function (lat, lon) {
+Earth.prototype.createMarker = function (lat, lon, val) {
     var marker = new Marker();
 
     var latRad = lat * (Math.PI / 180);
     var lonRad = -lon * (Math.PI / 180);
     var r = this.userData.radius;
-
+    var value = val;
+    console.log(value);
     marker.position.set(Math.cos(latRad) * Math.cos(lonRad) * r, Math.sin(latRad) * r, Math.cos(latRad) * Math.sin(lonRad) * r);
     marker.rotation.set(0.0, -lonRad, latRad - Math.PI * 0.5);
-
+    marker.userData = { URL: value };
+    console.log(marker);
+    objects.push(marker);
     this.add(marker);
 };
 
@@ -55,6 +59,7 @@ Earth.prototype.createMarker = function (lat, lon) {
 
 var scene, camera, renderer;
 var controls;
+var objects = [];
 
 init();
 
@@ -102,14 +107,16 @@ camera.add(light);
     ///añadir marcadores form DDBB
     $.get("back/MapSource.php",{func : "GetMap"}).done(function(data){
         datamap = (jQuery.parseJSON(data));
+        console.log(datamap);
         for(var k in datamap) {
-            earth.createMarker(datamap[k].long, datamap[k].lat);
+            earth.createMarker(datamap[k].lat, datamap[k].long, datamap[k].Pais+"");
          }
     });
 
 
 
     scene.add(earth);
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
 
     window.addEventListener('resize', onResize);
     onResize();
@@ -123,7 +130,32 @@ function onResize() {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+var mouse = new THREE.Vector2();
+function onDocumentMouseDown(event) {
+    console.log("a");
+    event.preventDefault();
+    mouse.x = ( (event.clientX - renderer.domElement.offsetLeft) / renderer.domElement.width ) * 2 - 1;
+    mouse.y = - ( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height ) * 2 + 1;
+    mouse.z = 0.5;
+    var raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera( mouse, camera);
+    var intersects = raycaster.intersectObjects(objects, true);
+	if (intersects.length > 0) {
+        console.log(intersects);
+		window.open(intersects[0].object.parent.userData.URL+"");
+	}
+    }
 
+    function onMouseMove( event ) {
+
+        // calculate mouse position in normalized device coordinates
+        // (-1 to +1) for both components
+    
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    
+    }
+    
 function animate() {
     requestAnimationFrame(animate);
 

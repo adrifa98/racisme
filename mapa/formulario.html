@@ -25,14 +25,20 @@
 
 <form class="form contact-form" id="contact_form">
 <div class="form-group">
-    <input type="text" name="nom" id="nom" class="input-md round form-control" onkeydown="lonlat()" placeholder="Nom" pattern=".{3,100}" required>
+    <input type="text" name="nom" id="nom" class="input-md round form-control" placeholder="Nom" pattern=".{3,100}" required>
 </div><div class="form-group">
-<select required class="input-md round form-control" onchange="var xhr = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.value + '&key=AIzaSyDVPLLlJAQ679Frd0gu11khJ9mW02wsvWQ');
+    <input type="hidden" id="func" name="func" value="AddMap">
+<select required class="input-md round form-control" name="pais" id="pais" onchange="var xhr = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.value + '&key=AIzaSyDVPLLlJAQ679Frd0gu11khJ9mW02wsvWQ');
 		xhr.done(function(data) {
+            document.getElementById('latf').value = data.results[0].geometry.location.lat;
+            document.getElementById('lonf').value = data.results[0].geometry.location.lng;
+
             document.getElementById('lat').value = data.results[0].geometry.location.lat;
             document.getElementById('lon').value = data.results[0].geometry.location.lng;
             
-		});">
+    });">
+
+    
   <option value="">Ubicació</option>
   <option value="Cataluña" id="CAT" disabled="disabled">-------------------</option>
   <option value="Cataluña" id="CAT">Catalunya</option>
@@ -275,20 +281,38 @@
     <option value="Zambia" id="ZM">Zambia</option>
     <option value="Zimbabue" id="ZW">Zimbabue</option>
 </select>
-<div class="cf-right-col"><input class="input-md form-control" id="lat" type="text" placeholder="COORDENADES LAT (automàtic)" disabled></div>
-<div class="cf-left-col"><input class="input-md form-control" id="lon" type="text" placeholder="COORDENADES LONG (automàtic)" disabled><br></div>
+</div>
+<input type="hidden" id="lat" name="lat">
+<input type="hidden" id="lon" name="lon">
+<div class="form-group">
+<div class="cf-right-col"><input class="input-md form-control" id="latf" name="latf" type="text" placeholder="COORDENADES LAT (automàtic)" disabled></div>
+<div class="cf-left-col"><input class="input-md form-control" id="lonf" name="lonf" type="text" placeholder="COORDENADES LONG (automàtic)" disabled><br></div>
 </div>
 <div class="form-group">                                            
 <textarea name="exp" id="exp" class="input-md round form-control" style="height: 84px;" placeholder="Experiencia"></textarea>
 </div>
 <div class="form-group">
-<div class="cf-right-col"><input class="input-md form-control" id="lat" type="text" placeholder="Pregunta de seguretat: 2+2?" required="required" pattern="4" title="Siusplau verifica que no ets un robot"></div>
+<div class="cf-right-col"><input class="input-md form-control" id="a" type="text" placeholder="Pregunta de seguretat: 2+2?" required="required" pattern="4" title="Siusplau verifica que no ets un robot"></div>
 <div class="cf-left-col">
-<button type="submit" href="#" class="btn btn-mod btn-glass btn-round btn-large">Comparteix</button>
+<button type="submit" class="btn btn-mod btn-glass btn-round btn-large">Comparteix</button>
 </div></div>
 </form>
     
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 
-
+<script>
+$(document).ready(function() {
+  $("#contact_form").submit(function() {
+    $.ajax({
+     type: "GET",
+      url: "/racisme/mapa/Back/MapSource.php",
+      data: $(this).serialize(),
+      success: function(response) {
+        debugger;
+        console.log(response);
+       }
+    })
+  })
+})
+</script>
 </html>

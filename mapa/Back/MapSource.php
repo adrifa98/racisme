@@ -1,7 +1,7 @@
 <?php
-
 include('conexiondb.class.php');
-switch ($_GET['func']) {
+$func = $_GET['func'];
+switch ($func) {
     case 'GetMap':
         getMapaData();
         break;
@@ -27,10 +27,13 @@ switch ($_GET['func']) {
     }
 
     function addMapaData(){
-        $name = $_GET['name'];
-        $text = $_GET['text'];
+        $name = $_GET['nom'];
+        $text = $_GET['exp'];
+        $lat = $_GET['lat'];
+        $lon = $_GET['lon'];
+        $pais = $_GET['pais'];
         $conexion = new conexiondb();
-        $query = "INSERT INTO `racism-web`.`messages` (`Name_person`, `long`, `lat`, `Message`) VALUES ('$name', '33333', '33333', '$text');";
+        $query = "INSERT INTO `racism-web`.`messages` (`Name_person`, `long`, `lat`, `Message`, `Pais`) VALUES ('$name', '$lon', '$lat', '$text', '$pais');";
         $result = $conexion->query($query);
     }
 ?>

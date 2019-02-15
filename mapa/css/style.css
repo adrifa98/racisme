@@ -2,24 +2,25 @@ html{
     background-color: transparent;
 }
 canvas {
-   position: absolute;
-   width: 100%;
+   position: fixed;
+   z-index: 2;
+   width: 90%;
    cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
-    animation: zoominoutsinglefeatured 5s;
+    animation: zoominoutsinglefeatured 9s;
 }
 
 @keyframes zoominoutsinglefeatured {
     0% {
-        transform: scale(0.1,0.1);
+        transform: rotate(-50deg) scale(0.1,0.1);
     }
-    60% {
-        transform: scale(1.1,1.1);
+    70% {
+        transform: scale(1.05,1.05);
     }
     100% {
-        transform: scale(1,1);
+        transform:rotate(0deg) scale(1,1);
     }
 }
 canvas:active {
@@ -27,4 +28,98 @@ canvas:active {
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
     
+}
+
+.luz {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+   -webkit-animation: flickerAnimation 10s infinite;
+   -moz-animation: flickerAnimation 10s infinite;
+   -o-animation: flickerAnimation 10s infinite;
+    animation: flickerAnimation 10s infinite;
+}
+.luz2 {
+   -webkit-animation: flickerAnimationn 10s;
+   -moz-animation: flickerAnimationn 10s;
+   -o-animation: flickerAnimationn 10s;
+    animation: flickerAnimationn 10s;
+}
+.luz3 {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    animation: zoominoutsinglefeatured2 10s;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+#luz3{
+    animation: luzanim 10s infinite, zoominoutsinglefeatured2 10s;
+    animation-delay: 1s;
+    opacity: 0;
+}
+
+@keyframes zoominoutsinglefeatured2 {
+    0% {
+        opacity: 0;
+    }
+    35% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes luzanim {
+  0%   { opacity:1; }
+  50%  { opacity:0.4; }
+  100% { opacity:1;}
+}
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0.6; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.6; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.6; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.6; }
+  100% { opacity:1; }
+}
+
+@keyframes flickerAnimationn {
+  0%   { opacity:0; }
+  40%  { opacity:0; }
+  100%  { opacity:1; }
+}
+@-o-keyframes flickerAnimationn{
+  0%   { opacity:0; }
+  40%  { opacity:0; }
+  100%  { opacity:1; }
+}
+@-moz-keyframes flickerAnimationn{
+  0%   { opacity:0; }
+  40%  { opacity:0; }
+  100%  { opacity:1; }
+}
+@-webkit-keyframes flickerAnimationn{
+  0%   { opacity:0; }
+  40%  { opacity:0; }
+  100%  { opacity:1; }
 }

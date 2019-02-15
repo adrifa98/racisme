@@ -82,13 +82,13 @@ function init() {
     controls.autoRotateSpeed = -1.0;
     controls.rotateSpeed = 0.4;
     controls.enablePan = false;
-    controls.minDistance = 3.5;
-    controls.maxDistance = 4.5;
+    controls.minDistance = 4.3;
+    controls.maxDistance = 4.3;
     controls.zoomSpeed = 0.4;
-    var ambient = new THREE.AmbientLight(0xffffff, 0.5);
+    var ambient = new THREE.AmbientLight(0xffffff, 0.45);
     scene.add(ambient);
 
-    var direcitonal = new THREE.DirectionalLight(0xffffff, 0.5);
+    var direcitonal = new THREE.DirectionalLight(0xffffff, 0.3);
     direcitonal.position.set(5.0, 2.0, 5.0).normalize();
     scene.add(direcitonal);
     

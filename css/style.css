@@ -6530,3 +6530,8 @@ input[type=checkbox]
     text-align: justify;
     padding-right: 4%
 }
+.tiendaa {
+    height: 110%;
+    margin-top: 4%;
+    margin-bottom: -5%;
+}
